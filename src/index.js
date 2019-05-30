@@ -162,3 +162,13 @@ const object = {
 }
 
 bindFunction.call(object, 15, 100, 'string');
+
+
+export {
+  returnFirstArgument,
+  sumWithDefaults,
+  returnArgumentsArray,
+  returnFnResult,
+  returnCounter,
+  bindFunction
+}
