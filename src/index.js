@@ -34,18 +34,12 @@ returnFirstArgument('Привет!');     // Привет!
  Пример:
    sumWithDefaults(10) вернет 110
  */
-function sumWithDefaults(a, b) {
+function sumWithDefaults(a, b = 100) {
     console.log(a + b);
     return a + b;
 }
 sumWithDefaults(10, 20);        // 30
 sumWithDefaults(2, 4);          // 6
-
-function sumWith100(a) {
-    console.log(a + 100);
-    return a + 100;
-}
-sumWith100(10);                 // 110
 
 
 /*
@@ -56,7 +50,7 @@ sumWith100(10);                 // 110
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-function first(fn) {
+function returnFnResult(fn) {
   console.log(fn());          // 10 
   return fn();
 }
@@ -65,7 +59,7 @@ function second() {
   return 10;
 }
 
-first(second);
+returnFnResult(second);
 
 
 /*
@@ -81,10 +75,10 @@ first(second);
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {
+function returnCounter(number = 0) {
   return function() {
     console.log(number + 1);
-    return number + 1;
+    return ++number;
   }
 }
 
@@ -101,7 +95,7 @@ returnCounter(1);
  */
 
 // Способ №1 (с использованием псевдомассива arguments (см. вебинар вопрос-ответ))
-function returnArgumentsArray1() {
+function returnArgumentsArray() {
   let array = [];
   for (let i = 0; i < arguments.length; i++) {
     array.push(arguments[i]);
@@ -110,31 +104,31 @@ function returnArgumentsArray1() {
   return array;
 }
 
-returnArgumentsArray1(1, 2, 3, 4);
+returnArgumentsArray(1, 2, 3, 4);
 
-// Способ №2 (с использованием прародителя всех массивов Array, метода from и псевдомассива arguments)
-function returnArgumentsArray2() {
-  console.log(Array.from(arguments))      // [1, 2, 3, 4]
-  return Array.from(arguments);
-}
+// // Способ №2 (с использованием прародителя всех массивов Array, метода from и псевдомассива arguments)
+// function returnArgumentsArray2() {
+//   console.log(Array.from(arguments))      // [1, 2, 3, 4]
+//   return Array.from(arguments);
+// }
 
-returnArgumentsArray2(1, 2, 3, 4);
+// returnArgumentsArray2(1, 2, 3, 4);
 
-// Способ №3 (с использованием спред-оператора (...) и псевдомассива arguments)
-function returnArgumentsArray3() {
-  console.log([...arguments]);            // [1, 2, 3, 4]
-  return([...arguments]);
-}
+// // Способ №3 (с использованием спред-оператора (...) и псевдомассива arguments)
+// function returnArgumentsArray3() {
+//   console.log([...arguments]);            // [1, 2, 3, 4]
+//   return([...arguments]);
+// }
 
-returnArgumentsArray3(1, 2, 3, 4);
+// returnArgumentsArray3(1, 2, 3, 4);
 
-// Способ №4 (с использованием спред-оператора (...) в аргументе функции)
-function returnArgumentsArray4(...rest) {
-  console.log(rest);                      // [1, 2, 3, 4]
-  return rest;
-}
+// // Способ №4 (с использованием спред-оператора (...) в аргументе функции)
+// function returnArgumentsArray4(...rest) {
+//   console.log(rest);                      // [1, 2, 3, 4]
+//   return rest;
+// }
 
-returnArgumentsArray4(1, 2, 3, 4);
+// returnArgumentsArray4(1, 2, 3, 4);
 
 
 /*
@@ -152,16 +146,10 @@ returnArgumentsArray4(1, 2, 3, 4);
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(a, b, c) {
-  console.log(this.divan, a, b, c);
-  return this.divan;
+function bindFunction(fn, ...args) {
+  return fn.bind(null, ...args);
 }
 
-const object = {
-  divan: '10'
-}
-
-bindFunction.call(object, 15, 100, 'string');
 
 
 export {
