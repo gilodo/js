@@ -101,7 +101,7 @@ returnCounter(1);
  */
 
 // Способ №1 (с использованием псевдомассива arguments (см. вебинар вопрос-ответ))
-function returnArgumentsArray() {
+function returnArgumentsArray1() {
   let array = [];
   for (let i = 0; i < arguments.length; i++) {
     array.push(arguments[i]);
@@ -110,31 +110,31 @@ function returnArgumentsArray() {
   return array;
 }
 
-returnArgumentsArray(1, 2, 3, 4);
+returnArgumentsArray1(1, 2, 3, 4);
 
 // Способ №2 (с использованием прародителя всех массивов Array, метода from и псевдомассива arguments)
-function returnArgumentsArray() {
+function returnArgumentsArray2() {
   console.log(Array.from(arguments))      // [1, 2, 3, 4]
   return Array.from(arguments);
 }
 
-returnArgumentsArray(1, 2, 3, 4);
+returnArgumentsArray2(1, 2, 3, 4);
 
 // Способ №3 (с использованием спред-оператора (...) и псевдомассива arguments)
-function returnArgumentsArray() {
+function returnArgumentsArray3() {
   console.log([...arguments]);            // [1, 2, 3, 4]
   return([...arguments]);
 }
 
-returnArgumentsArray(1, 2, 3, 4);
+returnArgumentsArray3(1, 2, 3, 4);
 
 // Способ №4 (с использованием спред-оператора (...) в аргументе функции)
-function returnArgumentsArray(...rest) {
+function returnArgumentsArray4(...rest) {
   console.log(rest);                      // [1, 2, 3, 4]
   return rest;
 }
 
-returnArgumentsArray(1, 2, 3, 4);
+returnArgumentsArray4(1, 2, 3, 4);
 
 
 /*
