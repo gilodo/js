@@ -12,8 +12,13 @@
 
  Другими словами: функция должна возвращать в неизменном виде то, что поступает ей на вход
  */
-function returnFirstArgument() {
+function returnFirstArgument(x) {
+    console.log(x);
+    return x;
 }
+returnFirstArgument(10);            // 10
+returnFirstArgument('Привет!');     // Привет!
+
 
 /*
  Задание 2:
@@ -30,7 +35,18 @@ function returnFirstArgument() {
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b) {
+    console.log(a + b);
+    return a + b;
 }
+sumWithDefaults(10, 20);        // 30
+sumWithDefaults(2, 4);          // 6
+
+function sumWith100(a) {
+    console.log(a + 100);
+    return a + 100;
+}
+sumWith100(10);                 // 110
+
 
 /*
  Задание 3:
@@ -40,8 +56,17 @@ function sumWithDefaults(a, b) {
  Пример:
    returnFnResult(() => 'привет') вернет 'привет'
  */
-function returnFnResult(fn) {
+function first(fn) {
+  console.log(fn());          // 10 
+  return fn();
 }
+
+function second() {
+  return 10;
+}
+
+first(second);
+
 
 /*
  Задание 4:
@@ -57,7 +82,13 @@ function returnFnResult(fn) {
    console.log(f()); // выведет 13
  */
 function returnCounter(number) {
+  return function() {
+    console.log(number + 1);
+    return number + 1;
+  }
 }
+
+returnCounter(1);
 
 /*
  Задание 5 *:
@@ -68,8 +99,43 @@ function returnCounter(number) {
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
+
+// Способ №1 (с использованием псевдомассива arguments (см. вебинар вопрос-ответ))
 function returnArgumentsArray() {
+  let array = [];
+  for (let i = 0; i < arguments.length; i++) {
+    array.push(arguments[i]);
+  }
+  console.log(array);                     // [1, 2, 3, 4]
+  return array;
 }
+
+returnArgumentsArray(1, 2, 3, 4);
+
+// Способ №2 (с использованием прародителя всех массивов Array, метода from и псевдомассива arguments)
+function returnArgumentsArray() {
+  console.log(Array.from(arguments))      // [1, 2, 3, 4]
+  return Array.from(arguments);
+}
+
+returnArgumentsArray(1, 2, 3, 4);
+
+// Способ №3 (с использованием спред-оператора (...) и псевдомассива arguments)
+function returnArgumentsArray() {
+  console.log([...arguments]);            // [1, 2, 3, 4]
+  return([...arguments]);
+}
+
+returnArgumentsArray(1, 2, 3, 4);
+
+// Способ №4 (с использованием спред-оператора (...) в аргументе функции)
+function returnArgumentsArray(...rest) {
+  console.log(rest);                      // [1, 2, 3, 4]
+  return rest;
+}
+
+returnArgumentsArray(1, 2, 3, 4);
+
 
 /*
  Задание 6 *:
@@ -86,14 +152,13 @@ function returnArgumentsArray() {
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn) {
+function bindFunction(a, b, c) {
+  console.log(this.divan, a, b, c);
+  return this.divan;
 }
 
-export {
-    returnFirstArgument,
-    sumWithDefaults,
-    returnArgumentsArray,
-    returnFnResult,
-    returnCounter,
-    bindFunction
+const object = {
+  divan: '10'
 }
+
+bindFunction.call(object, 15, 100, 'string');
