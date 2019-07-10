@@ -2,8 +2,22 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>{{htmlWebpackPlugin.options.title}}</title>
+  <title>Геоотзыв</title>
+  <link rel="stylesheet" href="./assets/main.css">
+  
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=2bded53b-d2cc-4d87-8837-9e972d9fcbba&lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
+  <div class="wrapper">
+      <div id="map" style="width: 100%; height: 100vh"></div>
+  </div>
+  <div class="reviews-slider">
+    <div class="slides"></div>
+    <div class="navigation">
+      <button class="nav_back"><</button>
+      <button class="nav_forward">></button>
+      <div class="pagination"></div>
+    </div>
+  </div>
 </body>
 </html>
